@@ -19,8 +19,8 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8">
-      <div className="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8">
+    <div className="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8 ">
+      <div className="w-full max-w-md bg-gray-800 rounded-xl shadow-lg p-8 ">
         <h2 className="text-3xl font-bold text-white text-center mb-6">Iniciar sesión</h2>
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <div>

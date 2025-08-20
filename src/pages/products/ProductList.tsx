@@ -1,73 +1,43 @@
-import React from "react";
-import { useProduct } from "../../hooks/useProducts";
-import { useProductForm } from "../../hooks/useProductForm";
-import type { Product } from "../../types/Product";
+import React, { useState } from "react";
+import { useProducts } from "../../hooks/useProducts";
+import { useDebounce } from "use-debounce";
 
 export const ProductList: React.FC = () => {
-  const {
-    products,
-    setProducts,
-    loading: loadingProducts,
-    error: errorProducts,
-    cancelFetch: cancelFetchProducts,
-  } = useProduct();
+  const { data: products, isLoading, isError, error } = useProducts();
+  const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebounce(search, 2000); 
 
-  const {
-    inputRef,
-    priceRef,
-    categoryRef,
-    addProduct,
-    loading: loadingForm,
-    error: errorForm,
-    cancelFetch: cancelFetchForm,
-  } = useProductForm((newProduct: Product) =>
-    setProducts((prev) => [...prev, newProduct])
+  if (isLoading) return <p className="text-gray-500">Cargando productos...</p>;
+  if (isError) return <p className="text-red-500">{error.message}</p>;
+
+  const filteredProducts = products?.filter((p) =>
+     p.nombre.toLowerCase().includes(debouncedSearch.toLowerCase())
   );
-
-  const isLoading = loadingProducts || loadingForm;
 
   return (
     <div className="p-4">
       <h1>Gestión de Productos</h1>
+      <div className="p-4">
+        <input
+          type="text"
+          placeholder="Buscar producto..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border p-2 rounded"
+        />
 
-      <div className="mb-4 flex items-center gap-2">
-        <input ref={inputRef} type="text" placeholder="Nombre" className="border p-2" />
-        <input ref={priceRef} type="number" placeholder="Precio" className="border p-2" />
-        <input ref={categoryRef} type="number" placeholder="ID Categoría" className="border p-2" />
-        <button
-          onClick={addProduct}
-          className="p-2 bg-blue-500 text-white"
-          disabled={loadingForm}
-        >
-          Agregar
-        </button>
-        {isLoading && (
-          <button
-            onClick={() => {
-              cancelFetchProducts();
-              cancelFetchForm();
-            }}
-            className="p-2 bg-red-500 text-white"
-          >
-            Cancelar
-          </button>
-        )}
+        <ul className="mt-4">
+          {filteredProducts && filteredProducts.length > 0 ? (
+            filteredProducts.map((p) => (
+              <li key={p.id} className="border-b py-1">
+                {p.nombre} - ${p.precio_unidad} (Categoría: {p.categoria.nombre})
+              </li>
+            ))
+          ) : (
+            <p className="text-gray-500">No se encontraron productos</p>
+          )}
+        </ul>
       </div>
-
-      {isLoading && <p className="text-gray-500 mb-2">Cargando productos...</p>}
-      {errorProducts && <p className="text-red-500 mb-2">{errorProducts}</p>}
-      {errorForm && <p className="text-red-500 mb-2">{errorForm}</p>}
-      {!isLoading && !errorProducts && !errorForm && products.length > 0 && (
-        <p className="text-green-500 mb-2">Todo fue bien</p>
-      )}
-
-      <ul className="mt-4">
-        {products.map((p) => (
-          <li key={p.id} className="border-b py-1">
-            {p.nombre} - ${p.precio_unidad} (Categoría: {p.id_categoria})
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };

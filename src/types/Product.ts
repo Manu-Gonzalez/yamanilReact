@@ -5,3 +5,10 @@ export interface Product {
     precio_unidad: number;
     id_categoria: number;
 }
+
+export interface ProductByCategory extends Product {
+    categoria: {
+        id: number,
+        nombre: string
+    }
+}
