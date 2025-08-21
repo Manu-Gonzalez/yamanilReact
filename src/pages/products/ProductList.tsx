@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";
 import { useDebounce } from "use-debounce";
 
+
+
 export const ProductList: React.FC = () => {
   const { data: products, isLoading, isError, error } = useProducts();
   const [search, setSearch] = useState("");
