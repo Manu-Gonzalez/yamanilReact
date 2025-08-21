@@ -1,37 +1,32 @@
 {
-  "name": "reac",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "yamanilreact",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@tailwindcss/vite": "^4.1.11",
-    "@tanstack/react-query": "^5.85.5",
-    "@tanstack/react-router": "^1.131.27",
-    "@tanstack/router-devtools": "^1.131.27",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-icons": "^5.5.0",
-    "tailwindcss": "^4.1.11",
-    "use-debounce": "^10.0.5"
+    "expo": "~53.0.20",
+    "expo-status-bar": "~2.2.3",
+    "nativewind": "^4.1.23",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "react": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-reanimated": "~3.17.4",
+    "react-native-safe-area-context": "5.4.0",
+    "tailwindcss": "^3.4.17",
+    "expo-router": "~5.1.4",
+    "react-native-screens": "~4.11.1",
+    "expo-linking": "~7.1.7",
+    "expo-constants": "~17.1.7"
   },
   "devDependencies": {
-    "@eslint/js": "^9.33.0",
-    "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^5.0.0",
-    "eslint": "^9.33.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.3.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.39.1",
-    "vite": "^7.1.2"
-  }
+    "@babel/core": "^7.25.2",
+    "@types/react": "~19.0.10",
+    "typescript": "~5.8.3"
+  },
+  "private": true
 }
