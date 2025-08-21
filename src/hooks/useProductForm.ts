@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createProduct } from "../api/products/CreateProduct";
+import { createProduct } from "../api/products/createProduct";
 import type { Product } from "../types/Product";
 
 export function useCreateProduct() {
