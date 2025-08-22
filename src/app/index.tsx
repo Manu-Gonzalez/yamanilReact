@@ -1,10 +1,15 @@
-import { Stack } from "expo-router";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { View, Text, StyleSheet } from "react-native";
 
-export default function App() {
+export default function Home() {
   return (
-    <SafeAreaProvider>
-      <Stack />
-    </SafeAreaProvider>
+    
+    <View style={styles.container}>
+      <Text style={styles.title}>Bienvenido a la App de Productos</Text>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  title: { fontSize: 20, fontWeight: "bold" },
+});
